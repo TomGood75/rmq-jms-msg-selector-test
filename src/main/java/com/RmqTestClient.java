@@ -36,7 +36,7 @@ public class RmqTestClient {
         if(ARG_PUBLISHER_MODE.equals(testMode))
             publishContinuously();
         else if(ARG_SUBSCRIBER_MODE.equals(testMode))
-            subscribeAndDisconnect();
+            subscribeAndDisconnectRepeatedly();
     }
 
     private static RMQConnection getNewConnection() throws JMSException {
@@ -65,7 +65,7 @@ public class RmqTestClient {
         }
     }
 
-    static void subscribeAndDisconnect(){
+    static void subscribeAndDisconnectRepeatedly(){
         try {
             while(true) {
                 logger.info("Initializing subscriber");
