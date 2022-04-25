@@ -13,7 +13,7 @@ import javax.jms.ObjectMessage;
 import javax.jms.TopicSubscriber;
 
 public class RmqTestClient {
-    final static String RMQ_HOST_STRING = "amqp://lme:lme@atscmn-lme-rmq-prd-01:5672/test";
+    static String RMQ_HOST_STRING = "amqp://lme:lme@atscmn-lme-rmq-prd-01:5672/test";
     final static String TEST_MSG_SELECTOR = "for_user = 'bob'";
     final static String testTopicName = "testTopic";
     final static RMQDestination testTopic = new RMQDestination(testTopicName, false, false);
@@ -31,12 +31,18 @@ public class RmqTestClient {
     public static void main(String[] args) {
         String testMode = ARG_SUBSCRIBER_MODE;
 //        String testMode = ARG_PUBLISHER_MODE;
-        if(args != null && args.length == 1)
+
+        if(args != null && args.length >= 1)
             testMode = args[0].toUpperCase().trim();
+        if(args != null && args.length >= 2)
+            RMQ_HOST_STRING = args[1].trim();
+
         if(ARG_PUBLISHER_MODE.equals(testMode))
             publishContinuously();
         else if(ARG_SUBSCRIBER_MODE.equals(testMode))
             subscribeAndDisconnectRepeatedly();
+        else
+            logger.error("No valid mode specified, should be P or S, to (P)ublish or (S)ubscribe.");
     }
 
     private static RMQConnection getNewConnection() throws JMSException {
