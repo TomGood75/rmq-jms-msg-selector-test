@@ -4,6 +4,10 @@ regarding https://github.com/rabbitmq/rabbitmq-server/issues/4615
 
 - all code is in the relatively short com.RmqTestClient class.
 
+UPDATED:
+- runnable jar is available in build/libs, so no need to compile if preferred.  RMQ URI can be passed as
+  - java -jar rmq-jms-msg-selector-test-1.0-SNAPSHOT.jar {S|P} amqp://lme:lme@atscmn-lme-rmq-prd-01:5672/test 
+
 usage:
 adjust RmqTestClient.RMQ_HOST_STRING to target your RabbitMQ instance.
 
